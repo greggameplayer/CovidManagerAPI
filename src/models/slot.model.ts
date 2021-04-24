@@ -1,7 +1,8 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
-import {Vial} from './vial.model';
+import {Entity, model, property} from '@loopback/repository';
 
-@model()
+@model({
+  jsonSchema: {nullable: true}
+})
 export class Slot extends Entity {
   @property({
     type: 'number',

@@ -1,6 +1,12 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne} from '@loopback/repository';
+import {Vaccine} from './vaccine.model';
+import {Slot} from './slot.model';
 
-@model()
+@model({
+  jsonSchema: {
+    nullable: true
+  }
+})
 export class Vial extends Entity {
   @property({
     type: 'number',
@@ -15,18 +21,11 @@ export class Vial extends Entity {
   })
   idVial?: number;
 
-  @property({
-    type: 'number',
-    required: true,
-  })
-  idVaccine: number;
+  @hasOne(() => Vaccine, {keyTo: 'idVaccine'})
+  vaccine: Vaccine;
 
-  @property({
-    type: 'number',
-    required: true,
-  })
-  idSlot: number;
-
+  @hasOne(() => Slot, {keyTo: 'idSlot'})
+  slot: Slot;
 
   constructor(data?: Partial<Vial>) {
     super(data);
@@ -34,7 +33,7 @@ export class Vial extends Entity {
 }
 
 export interface VialRelations {
-  // describe navigational properties here
+  vaccine: Vaccine;
 }
 
 export type VialWithRelations = Vial & VialRelations;

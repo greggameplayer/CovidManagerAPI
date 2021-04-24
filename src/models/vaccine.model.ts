@@ -1,5 +1,4 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
-import {Vial} from './vial.model';
+import {Entity, model, property} from '@loopback/repository';
 
 @model()
 export class Vaccine extends Entity {
