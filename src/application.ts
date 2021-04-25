@@ -9,6 +9,7 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {MySqlDataSource} from './datasources';
 
 export {ApplicationConfig};
 
@@ -40,5 +41,16 @@ export class CovidmanagerApiApplication extends BootMixin(
         nested: true,
       },
     };
+
+    this.bind('datasources.config.MySQL').to({
+      name: 'db',
+      connector: 'mysql',
+      hostname: process.env.MySQLHost,
+      port: process.env.MySQLPort,
+      user: process.env.MySQLUser,
+      password: process.env.MySQLPassword,
+      database: process.env.MySQLDatabase,
+    });
+    this.dataSource(MySqlDataSource);
   }
 }
