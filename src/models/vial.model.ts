@@ -25,7 +25,7 @@ export class Vial extends Entity {
   vaccine: Vaccine;
 
   @hasOne(() => Slot, {keyTo: 'idSlot'})
-  slot: Slot;
+  slot?: Slot;
 
   constructor(data?: Partial<Vial>) {
     super(data);
@@ -34,6 +34,7 @@ export class Vial extends Entity {
 
 export interface VialRelations {
   vaccine: Vaccine;
+  slot?: Slot;
 }
 
 export type VialWithRelations = Vial & VialRelations;
