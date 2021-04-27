@@ -19,7 +19,9 @@ import {
 } from '@loopback/rest';
 import {Slot} from '../models';
 import {SlotRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+@authenticate('jwt')
 export class SlotController {
   constructor(
     @repository(SlotRepository)

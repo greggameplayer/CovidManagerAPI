@@ -9,7 +9,12 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
-import {MySqlDataSource} from './datasources';
+import {AuthenticationComponent} from '@loopback/authentication';
+import {
+  JWTAuthenticationComponent,
+  UserServiceBindings,
+} from '@loopback/authentication-jwt';
+import {MySqlDataSource, UserDataSource} from './datasources';
 
 export {ApplicationConfig};
 
@@ -52,5 +57,14 @@ export class CovidmanagerApiApplication extends BootMixin(
       database: process.env.MySQLDatabase,
     });
     this.dataSource(MySqlDataSource);
+
+    // ------ ADD SNIPPET AT THE BOTTOM ---------
+    // Mount authentication system
+    this.component(AuthenticationComponent);
+    // Mount jwt component
+    this.component(JWTAuthenticationComponent);
+    // Bind datasource
+    this.dataSource(UserDataSource, UserServiceBindings.DATASOURCE_NAME);
+    // ------------- END OF SNIPPET -------------
   }
 }
