@@ -32,10 +32,10 @@ export class Vial extends Entity {
   })
   idVaccine: number;
 
-  @hasOne(() => Vaccine, {keyTo: 'idVaccine'})
+  @hasOne(() => Vaccine, {keyTo: 'idVaccine', keyFrom: 'idVaccine'})
   vaccine: Vaccine;
 
-  @hasOne(() => Slot, {keyTo: 'idSlot'})
+  @hasOne(() => Slot, {keyTo: 'idSlot', keyFrom: 'idSlot'})
   slot?: Slot;
 
   constructor(data?: Partial<Vial>) {
