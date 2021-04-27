@@ -65,8 +65,7 @@ export class VialController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Vial, {includeRelations: true}),
-          exclude: ['idSlot', 'idVaccine']
+          items: getModelSchemaRef(Vial, {includeRelations: true})
         },
       },
     },
@@ -74,12 +73,6 @@ export class VialController {
   async find(
     @param.filter(Vial) filter?: Filter<Vial>,
   ): Promise<Vial[]> {
-    if(typeof filter !== "undefined" && typeof filter?.fields == "undefined") {
-      filter.fields = {
-        idSlot: false,
-        idVaccine: false
-      }
-    }
     return this.vialRepository.find(filter);
   }
 
@@ -107,7 +100,7 @@ export class VialController {
     description: 'Vial model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Vial, {includeRelations: true, exclude: ['idSlot', 'idVaccine']}),
+        schema: getModelSchemaRef(Vial, {includeRelations: true}),
       },
     },
   })
@@ -115,12 +108,6 @@ export class VialController {
     @param.path.number('id') id: number,
     @param.filter(Vial, {exclude: 'where'}) filter?: FilterExcludingWhere<Vial>
   ): Promise<Vial> {
-    if(typeof filter !== "undefined" && typeof filter?.fields == "undefined") {
-      filter.fields = {
-        idSlot: false,
-        idVaccine: false
-      }
-    }
     return this.vialRepository.findById(id, filter);
   }
 
