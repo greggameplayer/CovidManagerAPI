@@ -21,6 +21,17 @@ export class Vial extends Entity {
   })
   idVial?: number;
 
+  @property({
+    type: 'number',
+  })
+  idSlot?: number;
+
+  @property({
+    type: 'number',
+    required: true,
+  })
+  idVaccine: number;
+
   @hasOne(() => Vaccine, {keyTo: 'idVaccine'})
   vaccine: Vaccine;
 
