@@ -76,6 +76,38 @@ export class VialController {
     return this.vialRepository.find(filter);
   }
 
+  @get('/vials/byvaccine/{id}')
+  @response(200, {
+    description: 'Array of Vial model instances',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'array',
+          items: getModelSchemaRef(Vial, {includeRelations: true})
+        },
+      },
+    },
+  })
+  async findByIdVaccine(
+    @param.path.number('id') id: number,
+    @param.filter(Vial) filter?: Filter<Vial>,
+  ): Promise<Vial[]> {
+    filter = {
+      where: {
+        idSlot: {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          eq: null
+        },
+        idVaccine: {
+          eq: id
+        }
+      },
+      include: ["vaccine", "slot"]
+    };
+    return this.vialRepository.find(filter);
+  }
+
   @patch('/vials')
   @response(200, {
     description: 'Vial PATCH success count',
