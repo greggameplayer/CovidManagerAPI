@@ -19,7 +19,9 @@ import {
 } from '@loopback/rest';
 import {Vaccine} from '../models';
 import {VaccineRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+@authenticate('jwt')
 export class VaccineController {
   constructor(
     @repository(VaccineRepository)

@@ -20,7 +20,9 @@ import {
   Vaccine,
 } from '../models';
 import {VialRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+@authenticate('jwt')
 export class VialVaccineController {
   constructor(
     @repository(VialRepository) protected vialRepository: VialRepository,

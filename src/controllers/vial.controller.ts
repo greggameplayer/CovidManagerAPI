@@ -19,7 +19,9 @@ import {
 } from '@loopback/rest';
 import {Vial} from '../models';
 import {VialRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+@authenticate('jwt')
 export class VialController {
   constructor(
     @repository(VialRepository)
