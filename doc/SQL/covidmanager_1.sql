@@ -40,10 +40,10 @@ CREATE TABLE IF NOT EXISTS `slot` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `vacccine`
+-- Structure de la table `vaccine`
 --
 
-DROP TABLE IF EXISTS `vacccine`;
+DROP TABLE IF EXISTS `vaccine`;
 CREATE TABLE IF NOT EXISTS `vacccine` (
   `idVaccine` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `vacccine` (
 -- Déchargement des données de la table `vacccine`
 --
 
-INSERT INTO `vacccine` (`idVaccine`, `name`) VALUES
+INSERT INTO `vaccine` (`idVaccine`, `name`) VALUES
 (1, 'Astrazenaca'),
 (2, 'Moderna'),
 (3, 'Pfizer'),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `vial` (
 --
 ALTER TABLE `vial`
   ADD CONSTRAINT `FK_Vial_Slot` FOREIGN KEY (`idSlot`) REFERENCES `slot` (`idSlot`) ON DELETE SET NULL,
-  ADD CONSTRAINT `FK_Vial_Vaccine` FOREIGN KEY (`idVaccine`) REFERENCES `vacccine` (`idVaccine`);
+  ADD CONSTRAINT `FK_Vial_Vaccine` FOREIGN KEY (`idVaccine`) REFERENCES `vaccine` (`idVaccine`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
